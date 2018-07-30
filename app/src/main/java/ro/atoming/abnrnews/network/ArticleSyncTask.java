@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.atoming.abnrnews.model.Article;
-import ro.atoming.abnrnews.ui.MainActivity;
 
 public class ArticleSyncTask {
     private static final String LOG_TAG = ArticleSyncTask.class.getSimpleName();
@@ -14,7 +13,7 @@ public class ArticleSyncTask {
     synchronized public static void syncHeadlineNews(){
         List<Article> articleList = new ArrayList<>();
         try{
-            articleList = QueryUtils.fetchNews(MainActivity.TEST_URL);
+            articleList = QueryUtils.fetchNews(QueryUtils.buildNewsUri(QueryUtils.CATEGORY_GENERAL));
         }catch (Exception e){
             e.printStackTrace();
         }
