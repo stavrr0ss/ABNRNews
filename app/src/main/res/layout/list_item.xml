@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="88dp"
+    >
+
+    <ImageView
+        android:id="@+id/image"
+        android:src="@drawable/newspaper_resized"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_margin="4dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/text_container"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
+
+        <TextView
+            android:id="@+id/article_name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Article Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="top"
+            />
+
+        <TextView
+            android:id="@+id/source_name"
+            android:text="BBC News"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26.07.2018"
+            android:gravity="bottom"
+            android:layout_marginBottom="4dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ABNR News</string>
+
+    <string name="fragment_title_headline">Headlines</string>
+    <string name="fragment_title_mynews">My News</string>
+    <string name="fragment_title_entertainment">Entertainment</string>
+    <string name="fragment_title_business">Business</string>
+    <string name="fragment_title_sports">Sport</string>
+    <string name="fragment_title_science">Science</string>
+    <string name="fragment_title_health">Health</string>
+    <string name="fragment_title_technology">Tech</string>
+</resources>
