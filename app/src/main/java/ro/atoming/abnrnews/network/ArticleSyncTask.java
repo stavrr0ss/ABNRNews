@@ -1,22 +1,28 @@
 package ro.atoming.abnrnews.network;
 
-import android.util.Log;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ro.atoming.abnrnews.model.Article;
+import ro.atoming.abnrnews.data.NewsContract;
 
 public class ArticleSyncTask {
     private static final String LOG_TAG = ArticleSyncTask.class.getSimpleName();
 
-    synchronized public static void syncHeadlineNews(){
-        List<Article> articleList = new ArrayList<>();
-        try{
-            articleList = QueryUtils.fetchNews(QueryUtils.buildNewsUri(QueryUtils.CATEGORY_GENERAL));
-        }catch (Exception e){
+    synchronized public static void syncHeadlineNews(Context context) {
+        try {
+
+
+            String jsonResponse = QueryUtils.fetchNews(QueryUtils.CATEGORY_SPORTS);
+            ContentValues[] newsValues = QueryUtils.getArticleValuesFromJsonResponse(jsonResponse);
+            if (newsValues != null && newsValues.length != 0) {
+                ContentResolver articlesContentResolver = context.getContentResolver();
+                articlesContentResolver.bulkInsert(
+                        NewsContract.NewsEntry.CONTENT_URI,
+                        newsValues);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.v(LOG_TAG,"THIS IS THE RETURNED LIST BY INTENT SERVICE !!!!!" + articleList.toString());
     }
 }

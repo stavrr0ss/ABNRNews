@@ -14,7 +14,7 @@ public class NewsContract {
 
     public static class NewsEntry implements BaseColumns {
 
-        //TODO : complete the database also with trailer details
+
         public static final String TABLE_NAME = "news";
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_SOURCE_ID = "sourceId";

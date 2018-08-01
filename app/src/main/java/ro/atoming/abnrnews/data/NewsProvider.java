@@ -113,6 +113,39 @@ public class NewsProvider extends ContentProvider {
     }
 
     @Override
+    public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
+        final SQLiteDatabase db = mNewsHelper.getWritableDatabase();
+
+        switch (sUriMatcher.match(uri)) {
+
+            case ARTICLES:
+                db.beginTransaction();
+                int rowsInserted = 0;
+                try {
+                    for (ContentValues value : values) {
+
+                        long id = db.insert(NewsEntry.TABLE_NAME, null, value);
+                        if (id != -1) {
+                            rowsInserted++;
+                        }
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+
+                if (rowsInserted > 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
+
+                return rowsInserted;
+
+            default:
+                return super.bulkInsert(uri, values);
+        }
+    }
+
+    @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         SQLiteDatabase db = mNewsHelper.getWritableDatabase();
 

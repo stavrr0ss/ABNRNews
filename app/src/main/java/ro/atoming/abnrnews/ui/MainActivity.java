@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.facebook.stetho.Stetho;
+
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.network.ArticleSyncUtils;
 import ro.atoming.abnrnews.ui.adapters.CategoryAdapter;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Stetho.initializeWithDefaults(this);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         CategoryAdapter fragmentAdapter = new CategoryAdapter(getSupportFragmentManager(),this);

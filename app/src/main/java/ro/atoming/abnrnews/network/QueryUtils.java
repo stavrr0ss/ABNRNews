@@ -1,5 +1,6 @@
 package ro.atoming.abnrnews.network;
 
+import android.content.ContentValues;
 import android.net.Uri;
 import android.util.Log;
 
@@ -19,6 +20,8 @@ import java.util.Scanner;
 import ro.atoming.abnrnews.BuildConfig;
 import ro.atoming.abnrnews.model.Article;
 import ro.atoming.abnrnews.model.ArticleSource;
+
+import static ro.atoming.abnrnews.data.NewsContract.NewsEntry;
 
 public class QueryUtils {
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
@@ -63,19 +66,19 @@ public class QueryUtils {
         return buildUri.toString();
     }
 
-    public static List<Article> fetchNews(String requestUrl) {
-        URL url = buildUrl(requestUrl);
+    public static String fetchNews(String category) {
+        URL url = buildUrl(buildNewsUri(category));
         String jsonResponse = null;
         try{
             jsonResponse = makeHttpRequest(url);
         }catch (IOException e){
             Log.e(LOG_TAG,"Problem with HTTP response !",e);
         }
-        List<Article> articleList = extractJsonResponse(jsonResponse);
-        return articleList;
+        return jsonResponse;
     }
 
-    private static URL buildUrl(String stringUrl) {
+
+    public static URL buildUrl(String stringUrl) {
         URL returnUrl = null;
         try {
             returnUrl = new URL(stringUrl);
@@ -85,7 +88,7 @@ public class QueryUtils {
         return returnUrl;
     }
 
-    private static String makeHttpRequest(URL url) throws IOException {
+    public static String makeHttpRequest(URL url) throws IOException {
         HttpURLConnection httpURLConnection = null;
         InputStream inputStream = null;
         String jsonResponse = "";
@@ -121,7 +124,44 @@ public class QueryUtils {
         return jsonResponse;
     }
 
-    private static List<Article> extractJsonResponse(String jsonResponse) {
+    /**
+     * private static List<Article> extractJsonResponse(String jsonResponse) {
+     * String author = "";
+     * String title = "";
+     * String description = "";
+     * String url = "";
+     * String image = "";
+     * String date = "";
+     * ArticleSource articleSource = null;
+     * String sourceId = "";
+     * String sourceName = "";
+     * Article returnedArticle = null;
+     * List<Article> articleList = new ArrayList<>();
+     * try{
+     * JSONObject jsonObject = new JSONObject(jsonResponse);
+     * JSONArray articlesArray = jsonObject.getJSONArray(ARTICLES_ARRAY);
+     * for (int i = 0; i<articlesArray.length();i++){
+     * JSONObject article = articlesArray.getJSONObject(i);
+     * JSONObject source = article.getJSONObject(ARTICLE_SOURCE);
+     * sourceId = source.optString(SOURCE_ID);
+     * sourceName = source.optString(SOURCE_NAME);
+     * articleSource = new ArticleSource(sourceId,sourceName);
+     * author = article.optString(ARTICLE_AUTHOR);
+     * title = article.optString(ARTICLE_TITLE);
+     * description = article.optString(ARTICLE_DESCRIPTION);
+     * url = article.optString(ARTICLE_URL);
+     * image = article.optString(ARTICLE_IMAGE);
+     * date = article.optString(ARTICLE_DATE);
+     * returnedArticle = new Article(articleSource,author,title,description,url,image,date);
+     * articleList.add(returnedArticle);
+     * }
+     * }catch (JSONException e){
+     * Log.e(LOG_TAG,"Error with Json Response !!!");
+     * }
+     * return articleList;
+     * }
+     */
+    public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse) {
         String author = "";
         String title = "";
         String description = "";
@@ -133,27 +173,43 @@ public class QueryUtils {
         String sourceName = "";
         Article returnedArticle = null;
         List<Article> articleList = new ArrayList<>();
-        try{
+
+        ContentValues[] articleValues = null;
+
+        try {
             JSONObject jsonObject = new JSONObject(jsonResponse);
             JSONArray articlesArray = jsonObject.getJSONArray(ARTICLES_ARRAY);
-            for (int i = 0; i<articlesArray.length();i++){
+            articleValues = new ContentValues[articlesArray.length()];
+            for (int i = 0; i < articlesArray.length(); i++) {
                 JSONObject article = articlesArray.getJSONObject(i);
                 JSONObject source = article.getJSONObject(ARTICLE_SOURCE);
                 sourceId = source.optString(SOURCE_ID);
                 sourceName = source.optString(SOURCE_NAME);
-                articleSource = new ArticleSource(sourceId,sourceName);
+
+                //articleSource = new ArticleSource(sourceId,sourceName);
+
                 author = article.optString(ARTICLE_AUTHOR);
                 title = article.optString(ARTICLE_TITLE);
                 description = article.optString(ARTICLE_DESCRIPTION);
                 url = article.optString(ARTICLE_URL);
                 image = article.optString(ARTICLE_IMAGE);
                 date = article.optString(ARTICLE_DATE);
-                returnedArticle = new Article(articleSource,author,title,description,url,image,date);
-                articleList.add(returnedArticle);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(NewsEntry.COLUMN_SOURCE_ID, sourceId);
+                contentValues.put(NewsEntry.COLUMN_SOURCE_NAME, sourceName);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_AUTHOR, author);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_TITLE, title);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_DESCRIPTION, description);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_URL, url);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_IMAGE, image);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_DATE, date);
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_CATEGORY, CATEGORY_SPORTS);//for testing purposes
+
+                articleValues[i] = contentValues;
             }
-        }catch (JSONException e){
-            Log.e(LOG_TAG,"Error with Json Response !!!");
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error with Json Response !!!");
         }
-        return articleList;
+        return articleValues;
     }
 }

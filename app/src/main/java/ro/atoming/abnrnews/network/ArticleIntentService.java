@@ -11,6 +11,6 @@ public class ArticleIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        ArticleSyncTask.syncHeadlineNews();
+        ArticleSyncTask.syncHeadlineNews(this);
     }
 }
