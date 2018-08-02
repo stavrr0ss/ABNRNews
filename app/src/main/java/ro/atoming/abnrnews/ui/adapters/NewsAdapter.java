@@ -1,8 +1,9 @@
-package ro.atoming.abnrnews.ui;
+package ro.atoming.abnrnews.ui.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.data.NewsContract;
+
+import static ro.atoming.abnrnews.data.NewsContract.NewsEntry.COLUMN_ARTICLE_URL;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterViewHolder> {
 
@@ -71,7 +74,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         int descriptionIndex = mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_DESCRIPTION);
         int dateIndex = mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_DATE);
         int imageIndex = mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_IMAGE);
-        int urlIndex = mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_URL);
+        int urlIndex = mCursor.getColumnIndex(COLUMN_ARTICLE_URL);
 
         String articleTitle = mCursor.getString(articleIndex);
         String sourceName = mCursor.getString(sourceIndex);
@@ -82,9 +85,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
 
         holder.mSourceName.setText(sourceName);
         holder.mArticleName.setText(articleTitle);
-        // holder.mArticleDescription.setText(description);
+        if (holder.mArticleDescription != null) {
+            holder.mArticleDescription.setText(description);
+        }
         holder.mArticleDate.setText(date);
-        Picasso.get().load(imageUrl).into(holder.mArticleImage);
+        Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.newspaper_resized)
+                .into(holder.mArticleImage);
+
 
     }
 
@@ -115,7 +124,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
      * The interface that receives onClick messages.
      */
     public interface ArticleAdapterOnClickHandler {
-        void onClick(int clickedItem);
+        void onClick(String articleUrl);
     }
 
     public class NewsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -125,8 +134,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         TextView mArticleName;
         @BindView(R.id.article_date)
         TextView mArticleDate;
-        //@BindView(R.id.description)
-        //TextView mArticleDescription;
+
+        @Nullable
+        @BindView(R.id.description)
+        TextView mArticleDescription;
         @BindView(R.id.source_name)
         TextView mSourceName;
 
@@ -139,7 +150,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
 
         @Override
         public void onClick(View view) {
-
+            int adapterPosition = getAdapterPosition();
+            mCursor.moveToPosition(adapterPosition);
+            String articleUrl = mCursor.getString(mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_URL));
+            mClickHandler.onClick(articleUrl);
         }
     }
 }

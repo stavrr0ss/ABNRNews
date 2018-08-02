@@ -11,6 +11,13 @@ public class ArticleIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        ArticleSyncTask.syncHeadlineNews(this);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_SPORTS);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_BUSINESS);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_SCIENCE);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_ENTERTAINMENT);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_HEALTH);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_TECHNOLOGY);
+        ArticleSyncTask.syncNews(this, QueryUtils.CATEGORY_GENERAL);
     }
+
 }

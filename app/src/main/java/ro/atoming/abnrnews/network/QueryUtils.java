@@ -55,11 +55,15 @@ public class QueryUtils {
     public static final String COUNTRY = "country";
     public static final String COUNTRY_TEST_US = "us";
 
+    public static final String pageSize = "pageSize";
+    public static final String PAGE_SIZE = "20";
+
 
     //helper method to build the desired url by category and country(later)
     public static String buildNewsUri(String category) {
         Uri buildUri = Uri.parse(HEADLINE_BASE_URL).buildUpon()
                 .appendQueryParameter(CATEGORY,category)
+                .appendQueryParameter(pageSize, PAGE_SIZE)
                 .appendQueryParameter(COUNTRY,COUNTRY_TEST_US)
                 .appendQueryParameter(api_key, API_KEY)
                 .build();
@@ -161,7 +165,7 @@ public class QueryUtils {
      * return articleList;
      * }
      */
-    public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse) {
+    public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse, String category) {
         String author = "";
         String title = "";
         String description = "";
@@ -203,7 +207,7 @@ public class QueryUtils {
                 contentValues.put(NewsEntry.COLUMN_ARTICLE_URL, url);
                 contentValues.put(NewsEntry.COLUMN_ARTICLE_IMAGE, image);
                 contentValues.put(NewsEntry.COLUMN_ARTICLE_DATE, date);
-                contentValues.put(NewsEntry.COLUMN_ARTICLE_CATEGORY, CATEGORY_SPORTS);//for testing purposes
+                contentValues.put(NewsEntry.COLUMN_ARTICLE_CATEGORY, category);//for testing purposes
 
                 articleValues[i] = contentValues;
             }

@@ -9,12 +9,12 @@ import ro.atoming.abnrnews.data.NewsContract;
 public class ArticleSyncTask {
     private static final String LOG_TAG = ArticleSyncTask.class.getSimpleName();
 
-    synchronized public static void syncHeadlineNews(Context context) {
+    synchronized public static void syncNews(Context context, String category) {
         try {
 
 
-            String jsonResponse = QueryUtils.fetchNews(QueryUtils.CATEGORY_SPORTS);
-            ContentValues[] newsValues = QueryUtils.getArticleValuesFromJsonResponse(jsonResponse);
+            String jsonResponse = QueryUtils.fetchNews(category);
+            ContentValues[] newsValues = QueryUtils.getArticleValuesFromJsonResponse(jsonResponse, category);
             if (newsValues != null && newsValues.length != 0) {
                 ContentResolver articlesContentResolver = context.getContentResolver();
                 articlesContentResolver.bulkInsert(

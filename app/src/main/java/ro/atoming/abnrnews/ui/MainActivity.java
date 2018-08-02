@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.facebook.stetho.Stetho;
 
 import ro.atoming.abnrnews.R;
+import ro.atoming.abnrnews.network.ArticleSyncUtils;
 import ro.atoming.abnrnews.ui.adapters.CategoryAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.sliding_tabs);
         tabs.setupWithViewPager(viewPager);
 
-        //ArticleSyncUtils.startImmediateSync(this);
+        ArticleSyncUtils.startImmediateSync(this);
     }
 
 }
