@@ -57,8 +57,6 @@ public class ArticleSyncUtils {
             public void run() {
 
                 String[] projectionColumns = {NewsContract.NewsEntry._ID};
-                //String selectionStatement = WeatherContract.WeatherEntry
-                //   .getSqlSelectForTodayOnwards();
 
                 Cursor cursor = context.getContentResolver().query(
                         NewsContract.NewsEntry.CONTENT_URI,
@@ -71,12 +69,10 @@ public class ArticleSyncUtils {
                     startImmediateSync(context);
                 }
 
-                /* Make sure to close the Cursor to avoid memory leaks! */
                 cursor.close();
             }
         });
 
-        /* Finally, once the thread is prepared, fire it off to perform our checks. */
         checkForEmpty.start();
     }
 

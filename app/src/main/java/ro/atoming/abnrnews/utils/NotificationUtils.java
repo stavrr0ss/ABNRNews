@@ -41,9 +41,9 @@ public class NotificationUtils {
                 .setContentTitle("My notification")
                 .setContentText("Hello World!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
                 && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
