@@ -24,12 +24,14 @@ public class FragmentUtils {
         };
         String selection = NewsContract.NewsEntry.COLUMN_ARTICLE_CATEGORY + " = ?";
         String[] selectionArgs = {category};
+        String sortOrder =
+                NewsContract.NewsEntry.COLUMN_ARTICLE_DATE + " DESC";
         CursorLoader newsLoader = new CursorLoader(context,
                 NewsContract.NewsEntry.CONTENT_URI,
                 projection,
                 selection,
                 selectionArgs,
-                null);
+                sortOrder);
         if (newsLoader == null) {
             Log.d(LOG_TAG, "THE CURSOR LOADER IS NULL!!!!");
         }

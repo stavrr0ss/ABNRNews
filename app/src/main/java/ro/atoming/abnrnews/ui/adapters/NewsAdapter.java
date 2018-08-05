@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,17 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.data.NewsContract;
 
 import static ro.atoming.abnrnews.data.NewsContract.NewsEntry.COLUMN_ARTICLE_URL;
+import static ro.atoming.abnrnews.data.NewsProvider.LOG_TAG;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterViewHolder> {
 
@@ -88,12 +94,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         if (holder.mArticleDescription != null) {
             holder.mArticleDescription.setText(description);
         }
-        holder.mArticleDate.setText(date);
+        try {
+            holder.mArticleDate.setText(dateToString(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Picasso.get()
                 .load(imageUrl)
                 .placeholder(R.drawable.newspaper_resized)
                 .into(holder.mArticleImage);
 
+
+    }
+
+    private String dateToString(String date) throws Exception {
+        String inputDate = date;
+        String format = "yyyy-MM-dd";
+
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+        Date d = sdf.parse(inputDate);
+        Log.d(LOG_TAG, "THIS IS THE DATE RETURNED " + d.toString());
+        return d.toString();
 
     }
 

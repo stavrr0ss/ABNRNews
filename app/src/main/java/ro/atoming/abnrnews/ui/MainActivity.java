@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.sliding_tabs);
         tabs.setupWithViewPager(viewPager);
 
-        ArticleSyncUtils.startImmediateSync(this);
+        ArticleSyncUtils.initialize(this);
     }
 
 }

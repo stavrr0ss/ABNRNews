@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +35,12 @@ public class ArticleDetailFragment extends Fragment {
         if (openWebIntent.hasExtra(DetailActivity.ARTICLE_URL_PATH)) {
             articleUrl = openWebIntent.getStringExtra(DetailActivity.ARTICLE_URL_PATH);
         }
+        mWebview.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+        });
         mWebview.loadUrl(articleUrl);
 
         return rootView;
