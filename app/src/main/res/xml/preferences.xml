@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="@bool/show_notifications"
+        android:key="@string/pref_enable_notifications_key"
+        android:summaryOff="Disabled"
+        android:summaryOn="Enabled"
+        android:title="Notifications" />
+    <EditTextPreference
+        android:defaultValue="@string/pref_pageSize_defaultValue"
+        android:hint="Maximum 100"
+        android:inputType="numberDecimal"
+        android:key="@string/pref_pageSize_key"
+        android:selectAllOnFocus="true"
+        android:title="Articles Returned" />
+
+    <ListPreference
+        android:defaultValue="@string/key_country_UnitedStates"
+        android:entries="@array/pref_country_labels"
+        android:entryValues="@array/pref_country_keys"
+        android:key="@string/pref_country_key"
+        android:title="Select Country" />
+
+</PreferenceScreen>

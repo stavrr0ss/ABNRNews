@@ -9,4 +9,127 @@
     <string name="fragment_title_science">Science</string>
     <string name="fragment_title_health">Health</string>
     <string name="fragment_title_technology">Tech</string>
+
+
+    <string name="country_array_label">Select country</string>
+    <!--Country keys-->
+    <string name="key_country_ArabEmirates">ae</string>
+    <string name="key_country_Argentina">ar</string>
+    <string name="key_country_Austria">at</string>
+    <string name="key_country_Australia">au</string>
+    <string name="key_country_Belgia">be</string>
+    <string name="key_country_Bulgaria">bg</string>
+    <string name="key_country_Brazil">br</string>
+    <string name="key_country_Canada">ca</string>
+    <string name="key_country_Switzerland">ch</string>
+    <string name="key_country_China">cn</string>
+    <string name="key_country_Columbia">co</string>
+    <string name="key_country_Cuba">cu</string>
+    <string name="key_country_Cehia">cz</string>
+    <string name="key_country_Germany">de</string>
+    <string name="key_country_Egipt">eg</string>
+    <string name="key_country_France">fr</string>
+    <string name="key_country_GreatBritain">gb</string>
+    <string name="key_country_Greece">gr</string>
+    <string name="key_country_HongKong">hk</string>
+    <string name="key_country_Hungary">hu</string>
+    <string name="key_country_Indonesia">id</string>
+    <string name="key_country_Irlanda">ie</string>
+    <string name="key_country_Israel">il</string>
+    <string name="key_country_India">in</string>
+    <string name="key_country_Italy">it</string>
+    <string name="key_country_Japan">jp</string>
+    <string name="key_country_SouthCorea">kr</string>
+    <string name="key_country_Lithuania">lt</string>
+    <string name="key_country_Letonia">lv</string>
+    <string name="key_country_Monaco">ma</string>
+    <string name="key_country_Mexic">mx</string>
+    <string name="key_country_Malaesya">my</string>
+    <string name="key_country_Nigeria">ng</string>
+    <string name="key_country_Netherland">nl</string>
+    <string name="key_country_Norvegia">no</string>
+    <string name="key_country_NewZeeland">nz</string>
+    <string name="key_country_Philipine">ph</string>
+    <string name="key_country_Poland">pl</string>
+    <string name="key_country_Portugal">pt</string>
+    <string name="key_country_Romania">ro</string>
+    <string name="key_country_Serbia">rs</string>
+    <string name="key_country_Rusia">ru</string>
+    <string name="key_country_ArabiaSaudita">sa</string>
+    <string name="key_country_Suedia">se</string>
+    <string name="key_country_Singapore">sg</string>
+    <string name="key_country_Slovenia">si</string>
+    <string name="key_country_Slovacia">sk</string>
+    <string name="key_country_Thailanda">th</string>
+    <string name="key_country_Turkey">tr</string>
+    <string name="key_country_Taiwan">tw</string>
+    <string name="key_country_Ucraina">ua</string>
+    <string name="key_country_UnitedStates">us</string>
+    <string name="key_country_Venezuela">ve</string>
+    <string name="key_country_SouthAfrica">za</string>
+
+    <!-- Country labels-->
+    <string name="label_country_ArabEmirates">Arab Emirates</string>
+    <string name="label_country_Argentina">Argentine</string>
+    <string name="label_country_Austria">Austria</string>
+    <string name="label_country_Australia">Australia</string>
+    <string name="label_country_Belgia">Belgium</string>
+    <string name="label_country_Bulgaria">Bulgary</string>
+    <string name="label_country_Brazil">Brasil</string>
+    <string name="label_country_Canada">Canada</string>
+    <string name="label_country_Switzerland">Switzerland</string>
+    <string name="label_country_China">China</string>
+    <string name="label_country_Columbia">Columbia</string>
+    <string name="label_country_Cuba">Cuba</string>
+    <string name="label_country_Cehia">Czech Republic</string>
+    <string name="label_country_Germany">Germany</string>
+    <string name="label_country_Egipt">Egypt</string>
+    <string name="label_country_France">France</string>
+    <string name="label_country_GreatBritain">Great Britain</string>
+    <string name="label_country_Greece">Greece</string>
+    <string name="label_country_HongKong">Hong Kong</string>
+    <string name="label_country_Hungary">Hungary</string>
+    <string name="label_country_Indonesia">Indonesia</string>
+    <string name="label_country_Irlanda">Irland</string>
+    <string name="label_country_Israel">Israel</string>
+    <string name="label_country_India">India</string>
+    <string name="label_country_Italy">Italy</string>
+    <string name="label_country_Japan">Japan</string>
+    <string name="label_country_SouthCorea">South Corea</string>
+    <string name="label_country_Lithuania">Lithuania</string>
+    <string name="label_country_Letonia">Latvia</string>
+    <string name="label_country_Monaco">Monaco</string>
+    <string name="label_country_Mexic">Mexico</string>
+    <string name="label_country_Malaesya">Malaysia</string>
+    <string name="label_country_Nigeria">Nigeria</string>
+    <string name="label_country_Netherland">Netherland</string>
+    <string name="label_country_Norvegia">Norway</string>
+    <string name="label_country_NewZeeland">New Zealand</string>
+    <string name="label_country_Philipine">Philippines</string>
+    <string name="label_country_Poland">Poland</string>
+    <string name="label_country_Portugal">Portugal</string>
+    <string name="label_country_Romania">Romania</string>
+    <string name="label_country_Serbia">Serbia</string>
+    <string name="label_country_Rusia">Russia</string>
+    <string name="label_country_ArabiaSaudita">Saudi Arabia</string>
+    <string name="label_country_Suedia">Sweeden</string>
+    <string name="label_country_Singapore">Singapore</string>
+    <string name="label_country_Slovenia">Slovenia</string>
+    <string name="label_country_Slovacia">Slovakia</string>
+    <string name="label_country_Thailanda">Thailand</string>
+    <string name="label_country_Turkey">Turkey</string>
+    <string name="label_country_Taiwan">Taiwan</string>
+    <string name="label_country_Ucraina">Ukraine</string>
+    <string name="label_country_UnitedStates">United States</string>
+    <string name="label_country_Venezuela">Venezuela</string>
+    <string name="label_country_SouthAfrica">South Africa</string>
+
+    <string name="pref_country_key" translatable="false">country</string>
+
+    <string name="pref_pageSize_key">pageSize</string>
+    <string name="pref_pageSize_defaultValue">20</string>
+
+    <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
+    <string name="pref_enable_notifications_label">News Notifications</string>
+
 </resources>

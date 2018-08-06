@@ -11,6 +11,7 @@ public class ArticleSyncTask {
     private static final String LOG_TAG = ArticleSyncTask.class.getSimpleName();
 
     synchronized public static void syncNews(Context context) {
+
         try {
             ContentResolver articlesContentResolver = context.getContentResolver();
             articlesContentResolver.delete(
@@ -40,7 +41,10 @@ public class ArticleSyncTask {
                             newsValues);
                 }
             }
-            NotificationUtils.notifyUserOfUpdate(context);
+            if (NotificationUtils.areNotificationsEnabled(context)) {
+                NotificationUtils.notifyUserOfUpdate(context);
+            }
+            //TODO : move the notifications to jobSerice or set it to once a day.
         } catch (Exception e) {
             e.printStackTrace();
         }

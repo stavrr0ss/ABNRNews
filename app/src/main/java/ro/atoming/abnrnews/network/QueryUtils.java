@@ -1,6 +1,7 @@
 package ro.atoming.abnrnews.network;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import java.util.Scanner;
 import ro.atoming.abnrnews.BuildConfig;
 import ro.atoming.abnrnews.model.Article;
 import ro.atoming.abnrnews.model.ArticleSource;
+import ro.atoming.abnrnews.ui.fragments.PreferenceFragment;
 
 import static ro.atoming.abnrnews.data.NewsContract.NewsEntry;
 
@@ -58,15 +60,17 @@ public class QueryUtils {
     public static final String pageSize = "pageSize";
     public static final String PAGE_SIZE = "20";
 
-
+    private static Context context;
     //helper method to build the desired url by category and country(later)
     public static String buildNewsUri(String category) {
+
         Uri buildUri = Uri.parse(HEADLINE_BASE_URL).buildUpon()
                 .appendQueryParameter(CATEGORY,category)
-                .appendQueryParameter(pageSize, PAGE_SIZE)
-                .appendQueryParameter(COUNTRY,COUNTRY_TEST_US)
+                .appendQueryParameter(pageSize, PreferenceFragment.ARTICLE_NUMBER)
+                .appendQueryParameter(COUNTRY, PreferenceFragment.COUNTRY_PREF)
                 .appendQueryParameter(api_key, API_KEY)
                 .build();
+        Log.d(LOG_TAG, "THIS IS THE BUILD URL !!!!!!! : " + buildUri.toString());
         return buildUri.toString();
     }
 
@@ -128,43 +132,6 @@ public class QueryUtils {
         return jsonResponse;
     }
 
-    /**
-     * private static List<Article> extractJsonResponse(String jsonResponse) {
-     * String author = "";
-     * String title = "";
-     * String description = "";
-     * String url = "";
-     * String image = "";
-     * String date = "";
-     * ArticleSource articleSource = null;
-     * String sourceId = "";
-     * String sourceName = "";
-     * Article returnedArticle = null;
-     * List<Article> articleList = new ArrayList<>();
-     * try{
-     * JSONObject jsonObject = new JSONObject(jsonResponse);
-     * JSONArray articlesArray = jsonObject.getJSONArray(ARTICLES_ARRAY);
-     * for (int i = 0; i<articlesArray.length();i++){
-     * JSONObject article = articlesArray.getJSONObject(i);
-     * JSONObject source = article.getJSONObject(ARTICLE_SOURCE);
-     * sourceId = source.optString(SOURCE_ID);
-     * sourceName = source.optString(SOURCE_NAME);
-     * articleSource = new ArticleSource(sourceId,sourceName);
-     * author = article.optString(ARTICLE_AUTHOR);
-     * title = article.optString(ARTICLE_TITLE);
-     * description = article.optString(ARTICLE_DESCRIPTION);
-     * url = article.optString(ARTICLE_URL);
-     * image = article.optString(ARTICLE_IMAGE);
-     * date = article.optString(ARTICLE_DATE);
-     * returnedArticle = new Article(articleSource,author,title,description,url,image,date);
-     * articleList.add(returnedArticle);
-     * }
-     * }catch (JSONException e){
-     * Log.e(LOG_TAG,"Error with Json Response !!!");
-     * }
-     * return articleList;
-     * }
-     */
     public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse, String category) {
         String author = "";
         String title = "";

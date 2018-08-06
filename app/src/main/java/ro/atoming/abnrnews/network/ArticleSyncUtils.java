@@ -19,7 +19,7 @@ import ro.atoming.abnrnews.data.NewsContract;
 
 public class ArticleSyncUtils {
 
-    private static final int SYNC_INTERVAL_HOURS = 4;
+    private static final int SYNC_INTERVAL_HOURS = 3;
     private static final int SYNC_INTERVAL_SECONDS = (int) TimeUnit.HOURS.toSeconds(SYNC_INTERVAL_HOURS);
     private static final int SYNC_FLEXTIME_SECONDS = SYNC_INTERVAL_SECONDS / 3;
     private static final String NEWS_SYNC_TAG = "articles-sync";
