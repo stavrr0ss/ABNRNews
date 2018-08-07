@@ -65,4 +65,5 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
             return mContext.getString(R.string.fragment_title_health);
         }
     }
+
 }

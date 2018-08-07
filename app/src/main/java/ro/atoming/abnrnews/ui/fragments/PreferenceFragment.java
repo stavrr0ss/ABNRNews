@@ -36,7 +36,7 @@ public class PreferenceFragment extends PreferenceFragmentCompat implements Shar
                 setPreferenceSummary(preference, value);
             }
         }
-        ArticleSyncUtils.startImmediateSync(getActivity());
+        //ArticleSyncUtils.startImmediateSync(getActivity());
     }
 
     @Override

@@ -25,6 +25,11 @@
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
         </service>
+        <service
+            android:name=".widget.ArticleWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
+
+        </service>
 
         <activity
             android:name=".ui.MainActivity"
@@ -39,7 +44,8 @@
         <provider
             android:name=".data.NewsProvider"
             android:authorities="ro.atoming.abnrnews"
-            android:exported="false" />
+            android:exported="true"
+            android:grantUriPermissions="true" />
 
         <activity android:name=".ui.DetailActivity" />
         <activity
@@ -47,6 +53,16 @@
             android:parentActivityName=".ui.MainActivity">
 
         </activity>
+
+        <receiver android:name=".widget.NewsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/news_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

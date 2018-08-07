@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="88dp"
+    android:layout_margin="4dp"
+    android:background="@android:color/white"
+    android:elevation="4dp"
     >
 
     <ImageView
@@ -13,41 +16,50 @@
         android:layout_height="88dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:layout_margin="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/text_container"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="16dp">
+        android:paddingLeft="8dp">
 
         <TextView
             android:id="@+id/article_name"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_alignParentLeft="true"
             android:text="Article Name"
-            android:textSize="18sp"
             android:textStyle="bold"
-            android:gravity="top"
+            android:textSize="16sp"
+
             />
 
         <TextView
             android:id="@+id/source_name"
-            android:text="BBC News"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/article_name"
+            android:gravity="bottom"
+            android:padding="4dp"
+            android:text="BBC News"
             />
         <TextView
             android:id="@+id/article_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="26.07.2018"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="4dp"
-            />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/article_name"
+            android:layout_marginLeft="16dp"
+            android:gravity="bottom"
+            android:padding="4dp"
+            android:text="26.07.2018" />
+    </RelativeLayout>
 
 </LinearLayout>

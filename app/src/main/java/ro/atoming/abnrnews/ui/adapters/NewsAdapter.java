@@ -30,6 +30,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
 
     public static final int FIRST_ARTICLE_VIEW = 0;
     public static final int GENERAL_ARTICLE_VIEW = 1;
+    private static final int TITLE_LENGTH = 80;
+    private static final int DATE_LENGHT = 10;
 
     private final Context mContext;
 
@@ -90,12 +92,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         String articleUrl = mCursor.getString(urlIndex);
 
         holder.mSourceName.setText(sourceName);
-        holder.mArticleName.setText(articleTitle);
+        holder.mArticleName.setText(getShortString(articleTitle));
+        //holder.mArticleName.setText(articleTitle);
         if (holder.mArticleDescription != null) {
             holder.mArticleDescription.setText(description);
         }
         try {
-            holder.mArticleDate.setText(dateToString(date));
+            String modifiedDate = dateToString(date);
+            holder.mArticleDate.setText(getShortDate(modifiedDate));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,16 +108,33 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
                 .load(imageUrl)
                 .placeholder(R.drawable.newspaper_resized)
                 .into(holder.mArticleImage);
-
-
     }
 
+    private String getShortString(String title) {
+        String shortTitle = "";
+        if (title.length() > TITLE_LENGTH) {
+            shortTitle = title.substring(0, TITLE_LENGTH) + "...";
+        } else {
+            shortTitle = title;
+        }
+        return shortTitle;
+    }
+
+    private String getShortDate(String date) {
+        String shortDate = "";
+        if (date.length() > DATE_LENGHT) {
+            shortDate = date.substring(0, DATE_LENGHT);
+        }
+        return shortDate;
+    }
+
+
     private String dateToString(String date) throws Exception {
-        String inputDate = date;
+
         String format = "yyyy-MM-dd";
 
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-        Date d = sdf.parse(inputDate);
+        Date d = sdf.parse(date);
         Log.d(LOG_TAG, "THIS IS THE DATE RETURNED " + d.toString());
         return d.toString();
 
