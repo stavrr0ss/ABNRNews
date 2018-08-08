@@ -15,8 +15,8 @@ import ro.atoming.abnrnews.network.ArticleSyncUtils;
 
 public class PreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    public static String COUNTRY_PREF = "us";
-    public static String ARTICLE_NUMBER = "20";
+    public String COUNTRY_PREF;
+    public String ARTICLE_NUMBER;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

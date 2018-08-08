@@ -110,7 +110,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
                 .into(holder.mArticleImage);
     }
 
-    private String getShortString(String title) {
+    public static String getShortString(String title) {
         String shortTitle = "";
         if (title.length() > TITLE_LENGTH) {
             shortTitle = title.substring(0, TITLE_LENGTH) + "...";
@@ -120,7 +120,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         return shortTitle;
     }
 
-    private String getShortDate(String date) {
+    public static String getShortDate(String date) {
         String shortDate = "";
         if (date.length() > DATE_LENGHT) {
             shortDate = date.substring(0, DATE_LENGHT);
@@ -129,7 +129,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
     }
 
 
-    private String dateToString(String date) throws Exception {
+    public static String dateToString(String date) throws Exception {
 
         String format = "yyyy-MM-dd";
 

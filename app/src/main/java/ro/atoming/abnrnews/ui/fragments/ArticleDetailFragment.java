@@ -22,6 +22,7 @@ public class ArticleDetailFragment extends Fragment {
     @BindView(R.id.webview)
     WebView mWebview;
     private String articleUrl;
+    public static final String ARTICLE_TITLE = "ro.atoming.abnrnews.ARTICLE_ID";
 
     public ArticleDetailFragment() {
     }

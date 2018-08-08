@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
 import ro.atoming.abnrnews.R;
@@ -40,8 +41,8 @@ public class NotificationUtils {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_action_news)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
+                .setContentTitle("ABNR News")
+                .setContentText("There are new articles waiting for you !")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true);
@@ -53,7 +54,7 @@ public class NotificationUtils {
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 
-    public static boolean areNotificationsEnabled(Context context) {
+    public static boolean areNotificationsEnabled(@NonNull Context context) {
 
         String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
         boolean shouldDisplayNotificationsByDefault = context

@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 
 import ro.atoming.abnrnews.data.NewsContract;
-import ro.atoming.abnrnews.utils.NotificationUtils;
+import ro.atoming.abnrnews.widget.ListViewRemoteFactory;
 
 public class ArticleSyncTask {
     private static final String LOG_TAG = ArticleSyncTask.class.getSimpleName();
@@ -31,7 +31,7 @@ public class ArticleSyncTask {
             ContentValues[] newsValues = null;
             for (int i = 0; i < categoryArray.length; i++) {
                 String categoryArticle = categoryArray[i];
-                String jsonResponse = QueryUtils.fetchNews(categoryArticle);
+                String jsonResponse = QueryUtils.fetchNews(categoryArticle, context);
                 newsValues = QueryUtils.getArticleValuesFromJsonResponse(jsonResponse, categoryArticle);
 
                 if (newsValues != null && newsValues.length != 0) {
@@ -41,12 +41,10 @@ public class ArticleSyncTask {
                             newsValues);
                 }
             }
-            if (NotificationUtils.areNotificationsEnabled(context)) {
-                NotificationUtils.notifyUserOfUpdate(context);
-            }
-            //TODO : move the notifications to jobSerice or set it to once a day.
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ListViewRemoteFactory.updateAllWidgets(context);
     }
 }

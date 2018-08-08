@@ -19,5 +19,6 @@ public class DetailActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         ArticleDetailFragment detailFragment = new ArticleDetailFragment();
         fm.beginTransaction().add(R.id.fragment_container, detailFragment).commit();
+
     }
 }

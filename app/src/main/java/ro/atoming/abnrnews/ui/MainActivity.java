@@ -15,6 +15,7 @@ import com.facebook.stetho.Stetho;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.network.ArticleSyncUtils;
 import ro.atoming.abnrnews.ui.adapters.CategoryAdapter;
+import ro.atoming.abnrnews.widget.ListViewRemoteFactory;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TEST_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c8600b24321c416db9225ea91647f69c";
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         ArticleSyncUtils.initialize(this);
+        ListViewRemoteFactory.updateAllWidgets(this);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

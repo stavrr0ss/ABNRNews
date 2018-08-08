@@ -2,7 +2,9 @@ package ro.atoming.abnrnews.network;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -19,9 +21,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import ro.atoming.abnrnews.BuildConfig;
+import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.model.Article;
 import ro.atoming.abnrnews.model.ArticleSource;
-import ro.atoming.abnrnews.ui.fragments.PreferenceFragment;
 
 import static ro.atoming.abnrnews.data.NewsContract.NewsEntry;
 
@@ -60,22 +62,29 @@ public class QueryUtils {
     public static final String pageSize = "pageSize";
     public static final String PAGE_SIZE = "20";
 
-    private static Context context;
+
+    // private static Context context ;
+
     //helper method to build the desired url by category and country(later)
-    public static String buildNewsUri(String category) {
+    public static String buildNewsUri(String category, Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences
+                (context);
+        String countryPref = sharedPreferences.getString(context.getString(R.string.pref_country_key), context.getString(R.string.key_country_UnitedStates));
+        String articleNumbersPref = sharedPreferences.getString(context.getString(R.string.pref_pageSize_key),
+                context.getString(R.string.pref_pageSize_defaultValue));
 
         Uri buildUri = Uri.parse(HEADLINE_BASE_URL).buildUpon()
                 .appendQueryParameter(CATEGORY,category)
-                .appendQueryParameter(pageSize, PreferenceFragment.ARTICLE_NUMBER)
-                .appendQueryParameter(COUNTRY, PreferenceFragment.COUNTRY_PREF)
+                .appendQueryParameter(pageSize, articleNumbersPref)
+                .appendQueryParameter(COUNTRY, countryPref)
                 .appendQueryParameter(api_key, API_KEY)
                 .build();
         Log.d(LOG_TAG, "THIS IS THE BUILD URL !!!!!!! : " + buildUri.toString());
         return buildUri.toString();
     }
 
-    public static String fetchNews(String category) {
-        URL url = buildUrl(buildNewsUri(category));
+    public static String fetchNews(String category, Context context) {
+        URL url = buildUrl(buildNewsUri(category, context));
         String jsonResponse = null;
         try{
             jsonResponse = makeHttpRequest(url);
