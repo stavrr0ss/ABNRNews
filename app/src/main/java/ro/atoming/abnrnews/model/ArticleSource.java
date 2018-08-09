@@ -38,6 +38,34 @@ public class ArticleSource implements Parcelable{
         mCountry = in.readString();
     }
 
+    public String getSourceName() {
+        return mName;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public String getSourceUrl() {
+        return mUrl;
+    }
+
+    public String getSourceCategory() {
+        return mCategory;
+    }
+
+    public String getSourceLanguage() {
+        return mLanguage;
+    }
+
+    public String getSourceCountry() {
+        return mCountry;
+    }
+
     public static final Creator<ArticleSource> CREATOR = new Creator<ArticleSource>() {
         @Override
         public ArticleSource createFromParcel(Parcel in) {

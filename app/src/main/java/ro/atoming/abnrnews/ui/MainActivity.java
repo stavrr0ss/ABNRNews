@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         Toolbar myToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         CategoryAdapter fragmentAdapter = new CategoryAdapter(getSupportFragmentManager(),this);

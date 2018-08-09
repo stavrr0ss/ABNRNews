@@ -57,10 +57,9 @@ public class QueryUtils {
     public static final String CATEGORY_GENERAL = "general";
 
     public static final String COUNTRY = "country";
-    public static final String COUNTRY_TEST_US = "us";
-
     public static final String pageSize = "pageSize";
-    public static final String PAGE_SIZE = "20";
+    public static final String query = "q";
+
 
 
     // private static Context context ;
@@ -83,6 +82,28 @@ public class QueryUtils {
         return buildUri.toString();
     }
 
+    /**
+     * helper method fot building the searchQuery
+     *
+     * @param searchTerm is the query inserted by the user
+     * @param context    the Activity context
+     * @return
+     */
+    public static String buildQueryUri(String searchTerm, Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences
+                (context);
+        String articleNumbersPref = sharedPreferences.getString(context.getString(R.string.pref_pageSize_key),
+                context.getString(R.string.pref_pageSize_defaultValue));
+
+        Uri buildUri = Uri.parse(EVERYTHING_BASE_URL).buildUpon()
+                .appendQueryParameter(pageSize, articleNumbersPref)
+                .appendQueryParameter(query, searchTerm)
+                .appendQueryParameter(api_key, API_KEY)
+                .build();
+        Log.d(LOG_TAG, "THIS IS THE QUERY URL !!!!!!! : " + buildUri.toString());
+        return buildUri.toString();
+    }
+
     public static String fetchNews(String category, Context context) {
         URL url = buildUrl(buildNewsUri(category, context));
         String jsonResponse = null;
@@ -92,6 +113,21 @@ public class QueryUtils {
             Log.e(LOG_TAG,"Problem with HTTP response !",e);
         }
         return jsonResponse;
+    }
+
+    /**
+     * method used to extract a List of articles for the My News Fragment
+     */
+    public static List<Article> queryArticles(String searchTerm, Context context) {
+        URL url = buildUrl(buildQueryUri(searchTerm, context));
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem with HTTP response !", e);
+        }
+        List<Article> articleList = getArticlesFromJson(jsonResponse);
+        return articleList;
     }
 
 
@@ -142,20 +178,8 @@ public class QueryUtils {
     }
 
     public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse, String category) {
-        String author = "";
-        String title = "";
-        String description = "";
-        String url = "";
-        String image = "";
-        String date = "";
-        ArticleSource articleSource = null;
-        String sourceId = "";
-        String sourceName = "";
-        Article returnedArticle = null;
-        List<Article> articleList = new ArrayList<>();
 
         ContentValues[] articleValues = null;
-
         try {
             JSONObject jsonObject = new JSONObject(jsonResponse);
             JSONArray articlesArray = jsonObject.getJSONArray(ARTICLES_ARRAY);
@@ -163,17 +187,15 @@ public class QueryUtils {
             for (int i = 0; i < articlesArray.length(); i++) {
                 JSONObject article = articlesArray.getJSONObject(i);
                 JSONObject source = article.getJSONObject(ARTICLE_SOURCE);
-                sourceId = source.optString(SOURCE_ID);
-                sourceName = source.optString(SOURCE_NAME);
+                String sourceId = source.optString(SOURCE_ID);
+                String sourceName = source.optString(SOURCE_NAME);
+                String author = article.optString(ARTICLE_AUTHOR);
+                String title = article.optString(ARTICLE_TITLE);
+                String description = article.optString(ARTICLE_DESCRIPTION);
+                String url = article.optString(ARTICLE_URL);
+                String image = article.optString(ARTICLE_IMAGE);
+                String date = article.optString(ARTICLE_DATE);
 
-                //articleSource = new ArticleSource(sourceId,sourceName);
-
-                author = article.optString(ARTICLE_AUTHOR);
-                title = article.optString(ARTICLE_TITLE);
-                description = article.optString(ARTICLE_DESCRIPTION);
-                url = article.optString(ARTICLE_URL);
-                image = article.optString(ARTICLE_IMAGE);
-                date = article.optString(ARTICLE_DATE);
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(NewsEntry.COLUMN_SOURCE_ID, sourceId);
                 contentValues.put(NewsEntry.COLUMN_SOURCE_NAME, sourceName);
@@ -191,5 +213,52 @@ public class QueryUtils {
             Log.e(LOG_TAG, "Error with Json Response !!!");
         }
         return articleValues;
+    }
+
+    /**
+     * method used to extract the Json response in an Article List for using in My News Fragment
+     *
+     * @param jsonResponse
+     * @return
+     */
+
+    public static List<Article> getArticlesFromJson(String jsonResponse) {
+        String author = "";
+        String title = "";
+        String description = "";
+        String url = "";
+        String image = "";
+        String date = "";
+        ArticleSource articleSource = null;
+        String sourceId = "";
+        String sourceName = "";
+        Article returnedArticle = null;
+        List<Article> articleList = new ArrayList<>();
+
+        try {
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONArray articlesArray = jsonObject.getJSONArray(ARTICLES_ARRAY);
+
+            for (int i = 0; i < articlesArray.length(); i++) {
+                JSONObject article = articlesArray.getJSONObject(i);
+                JSONObject source = article.getJSONObject(ARTICLE_SOURCE);
+                sourceId = source.optString(SOURCE_ID);
+                sourceName = source.optString(SOURCE_NAME);
+
+                articleSource = new ArticleSource(sourceId,sourceName);
+
+                author = article.optString(ARTICLE_AUTHOR);
+                title = article.optString(ARTICLE_TITLE);
+                description = article.optString(ARTICLE_DESCRIPTION);
+                url = article.optString(ARTICLE_URL);
+                image = article.optString(ARTICLE_IMAGE);
+                date = article.optString(ARTICLE_DATE);
+                returnedArticle = new Article(articleSource, author, title, description, url, image, date);
+                articleList.add(returnedArticle);
+            }
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error with Json Response !!!");
+        }
+        return articleList;
     }
 }

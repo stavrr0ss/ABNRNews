@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,9 +94,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
 
         holder.mSourceName.setText(sourceName);
         holder.mArticleName.setText(getShortString(articleTitle));
-        //holder.mArticleName.setText(articleTitle);
         if (holder.mArticleDescription != null) {
-            holder.mArticleDescription.setText(description);
+            if (description != null) {
+                holder.mArticleDescription.setText(description);
+            } else {
+                holder.mArticleDescription.setText("No description available !");
+            }
+
         }
         try {
             String modifiedDate = dateToString(date);
@@ -103,11 +108,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Picasso.get()
-                .load(imageUrl)
-                .placeholder(R.drawable.newspaper_resized)
-                .into(holder.mArticleImage);
+        if (!TextUtils.isEmpty(imageUrl)) {
+            Picasso.get()
+                    .load(imageUrl)
+                    .placeholder(R.drawable.newspaper_resized)
+                    .into(holder.mArticleImage);
+        }
     }
 
     public static String getShortString(String title) {
