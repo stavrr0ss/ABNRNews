@@ -63,7 +63,7 @@ public class MyNewsAdapter extends RecyclerView.Adapter<MyNewsAdapter.MyNewsView
             if (description != null) {
                 holder.mArticleDescription.setText(description);
             } else {
-                holder.mArticleDescription.setText("No description available !");
+                holder.mArticleDescription.setText(mContext.getString(R.string.no_article_description_text));
             }
         }
         try {

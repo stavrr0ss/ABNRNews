@@ -4,38 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="88dp"
-    android:layout_margin="4dp"
-    android:background="@android:color/white"
-    android:elevation="4dp"
-    >
+    android:layout_margin="@dimen/list_item_padding"
+    android:background="@color/cardview_light_background"
+    android:elevation="8dp">
 
     <ImageView
         android:id="@+id/image"
+        android:layout_marginBottom="@dimen/list_item_padding"
         android:src="@drawable/newspaper_resized"
         android:layout_width="88dp"
         android:layout_height="88dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        />
+        android:layout_marginTop="@dimen/list_item_padding"
+        android:contentDescription="@string/list_item_image_contentDescription" />
 
     <RelativeLayout
         android:id="@+id/text_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="8dp">
+        android:paddingLeft="@dimen/list_item_date_margin"
+        android:paddingRight="@dimen/list_item_date_margin">
 
         <TextView
             android:id="@+id/article_name"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="Article Name"
+            android:layout_alignParentStart="true"
+            android:text="@string/article_name_placeholder"
             android:textStyle="bold"
             android:textSize="16sp"
-
             />
 
         <TextView
@@ -43,23 +42,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@id/article_name"
             android:gravity="bottom"
-            android:padding="4dp"
-            android:text="BBC News"
+            android:padding="@dimen/list_item_padding"
+            android:text="@string/source_name_placeholder"
             />
         <TextView
             android:id="@+id/article_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/article_name"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="@dimen/list_item_date_margin"
             android:gravity="bottom"
-            android:padding="4dp"
-            android:text="26.07.2018" />
+            android:padding="@dimen/list_item_padding"
+            android:text="@string/list_item_date_placeholder" />
     </RelativeLayout>
 
 </LinearLayout>

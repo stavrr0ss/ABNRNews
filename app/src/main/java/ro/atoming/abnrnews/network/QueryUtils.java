@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import ro.atoming.abnrnews.BuildConfig;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.model.Article;
 import ro.atoming.abnrnews.model.ArticleSource;
@@ -42,8 +41,7 @@ public class QueryUtils {
 
     public static final String HEADLINE_BASE_URL = "https://newsapi.org/v2/top-headlines";
     public static final String EVERYTHING_BASE_URL = "https://newsapi.org/v2/everything";
-    public static final String SOURCE_BASE_URL = "https://newsapi.org/v2/sources";
-    public static final String API_KEY = BuildConfig.API_KEY;
+    public static final String API_KEY = "";
     public static final String api_key = "apiKey";
 
     //Headlines search parameters
@@ -177,6 +175,13 @@ public class QueryUtils {
         return jsonResponse;
     }
 
+    /**
+     * Method for extracting the Json response directly to Db.
+     *
+     * @param jsonResponse
+     * @param category
+     * @return
+     */
     public static ContentValues[] getArticleValuesFromJsonResponse(String jsonResponse, String category) {
 
         ContentValues[] articleValues = null;

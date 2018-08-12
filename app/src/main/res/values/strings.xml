@@ -131,7 +131,23 @@
 
     <string name="pref_enable_notifications_key" translatable="false">enable_notifications</string>
     <string name="pref_enable_notifications_label">News Notifications</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">ABNR News</string>
     <string name="add_widget">Add widget</string>
+    <string name="no_internet_connection">There is no internet connection !</string>
+    <string name="run_search_here">You can run your searches here ! Check also 
+        the Settings to see options .</string>
+
+    <string name="share_link_chooser">Share Link</string>
+    <string name="list_item_image_contentDescription">Displays the article image returned by query.</string>
+    <string name="article_name_placeholder">Article Name Placeholder</string>
+    <string name="source_name_placeholder">BBC News Placeholder</string>
+    <string name="list_item_date_placeholder">26.07.2018</string>
+    <string name="widget_image_content_description">Visual placeholder for future upgrades.</string>
+    <string name="query_hint_text">Search for news</string>
+    <string name="searchView_tooltip_text">Search for news here</string>
+    <string name="no_article_description_text">No description available !</string>
+    <string name="fab_contentDescription">Button used to share the current article link by mail or social media.</string>
+    <string name="notification_contentText">There are new articles waiting for you !</string>
+    <string name="settings_title">Settings</string>
 
 </resources>

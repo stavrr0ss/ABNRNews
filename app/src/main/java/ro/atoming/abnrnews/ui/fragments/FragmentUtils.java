@@ -12,8 +12,6 @@ import static ro.atoming.abnrnews.data.NewsProvider.LOG_TAG;
 
 public class FragmentUtils {
 
-    private static Context mContext;
-
     public static Loader<Cursor> fragmentLoader(Context context, String category) {
         String[] projection = {NewsContract.NewsEntry.COLUMN_ARTICLE_TITLE,
                 NewsContract.NewsEntry.COLUMN_ARTICLE_DESCRIPTION,

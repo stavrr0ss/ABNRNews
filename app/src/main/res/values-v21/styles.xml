@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/accentColorABNR</item>
+        <item name="colorPrimary">@color/primaryColorABNR</item>
+        <item name="colorPrimaryDark">@color/darkPrimaryColorABNR</item>
+
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+
+        <item name="android:windowExitTransition">@android:transition/fade</item>
+        <item name="android:windowReenterTransition">@android:transition/slide_left</item>
+    </style>
+</resources>

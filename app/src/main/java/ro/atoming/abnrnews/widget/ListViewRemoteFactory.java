@@ -74,7 +74,6 @@ public class ListViewRemoteFactory implements RemoteViewsService.RemoteViewsFact
         String articleDate = mCursor.getString(articleDateIndex);
 
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.list_item_widget);
-//TODO: take this methods and also from NewsAdapter and move it to a Util class to use where you want
         views.setTextViewText(R.id.widget_article_name, NewsAdapter.getShortString(articleTitle));
         try {
             String modifiedDate = NewsAdapter.dateToString(articleDate);
@@ -82,7 +81,6 @@ public class ListViewRemoteFactory implements RemoteViewsService.RemoteViewsFact
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return views;
     }
 

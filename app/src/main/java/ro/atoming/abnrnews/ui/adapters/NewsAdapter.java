@@ -2,6 +2,7 @@ package ro.atoming.abnrnews.ui.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -34,11 +35,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
     private static final int TITLE_LENGTH = 80;
     private static final int DATE_LENGHT = 10;
 
+
     private final Context mContext;
 
     final private ArticleAdapterOnClickHandler mClickHandler;
     private boolean mUseFirstArticleLayout;
     private Cursor mCursor;
+    private Bundle mBundle;
 
     public NewsAdapter(@NonNull Context context, ArticleAdapterOnClickHandler articleAdapterOnClickHandler) {
         mContext = context;
@@ -51,28 +54,50 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
     public NewsAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         int layoutId;
-
         switch (viewType) {
-
             case FIRST_ARTICLE_VIEW: {
                 layoutId = R.layout.first_article_item;
                 break;
             }
-
             case GENERAL_ARTICLE_VIEW: {
                 layoutId = R.layout.list_item;
                 break;
             }
-
             default:
                 throw new IllegalArgumentException("Invalid view type, value of " + viewType);
         }
 
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-
         view.setFocusable(true);
-
         return new NewsAdapterViewHolder(view);
+    }
+
+    public static String getShortString(String title) {
+        String shortTitle = "";
+        if (title.length() > TITLE_LENGTH) {
+            shortTitle = title.substring(0, TITLE_LENGTH) + "...";
+        } else {
+            shortTitle = title;
+        }
+        return shortTitle;
+    }
+
+    public static String dateToString(String date) throws Exception {
+
+        String format = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+        Date d = sdf.parse(date);
+        Log.d(LOG_TAG, "THIS IS THE DATE RETURNED " + d.toString());
+        return d.toString();
+
+    }
+
+    public static String getShortDate(String date) {
+        String shortDate = "";
+        if (date.length() > DATE_LENGHT) {
+            shortDate = date.substring(0, DATE_LENGHT);
+        }
+        return shortDate;
     }
 
     @Override
@@ -98,9 +123,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
             if (description != null) {
                 holder.mArticleDescription.setText(description);
             } else {
-                holder.mArticleDescription.setText("No description available !");
+                holder.mArticleDescription.setText(mContext.getString(R.string.no_article_description_text));
             }
-
         }
         try {
             String modifiedDate = dateToString(date);
@@ -114,36 +138,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
                     .placeholder(R.drawable.newspaper_resized)
                     .into(holder.mArticleImage);
         }
-    }
-
-    public static String getShortString(String title) {
-        String shortTitle = "";
-        if (title.length() > TITLE_LENGTH) {
-            shortTitle = title.substring(0, TITLE_LENGTH) + "...";
-        } else {
-            shortTitle = title;
-        }
-        return shortTitle;
-    }
-
-    public static String getShortDate(String date) {
-        String shortDate = "";
-        if (date.length() > DATE_LENGHT) {
-            shortDate = date.substring(0, DATE_LENGHT);
-        }
-        return shortDate;
-    }
-
-
-    public static String dateToString(String date) throws Exception {
-
-        String format = "yyyy-MM-dd";
-
-        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-        Date d = sdf.parse(date);
-        Log.d(LOG_TAG, "THIS IS THE DATE RETURNED " + d.toString());
-        return d.toString();
-
     }
 
     @Override
@@ -173,7 +167,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
      * The interface that receives onClick messages.
      */
     public interface ArticleAdapterOnClickHandler {
-        void onClick(String articleUrl);
+        void onClick(String articleUrl, Bundle bundle);
     }
 
     public class NewsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -202,7 +196,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
             int adapterPosition = getAdapterPosition();
             mCursor.moveToPosition(adapterPosition);
             String articleUrl = mCursor.getString(mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_ARTICLE_URL));
-            mClickHandler.onClick(articleUrl);
+            mClickHandler.onClick(articleUrl, mBundle);
         }
     }
 }

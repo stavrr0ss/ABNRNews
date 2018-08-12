@@ -77,9 +77,12 @@ public class EntertainmentFragment extends Fragment implements android.support.v
     }
 
     @Override
-    public void onClick(String articleUrl) {
+    public void onClick(String articleUrl, Bundle bundle) {
         Intent openArticleIntent = new Intent(getActivity(), DetailActivity.class);
         openArticleIntent.putExtra(DetailActivity.ARTICLE_URL_PATH, articleUrl);
-        startActivity(openArticleIntent);
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        //  bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle();
+        //}
+        startActivity(openArticleIntent, bundle);
     }
 }

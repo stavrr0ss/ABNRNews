@@ -23,15 +23,10 @@ public class NewsWidget extends AppWidgetProvider {
         Intent intent = new Intent(context, ArticleWidgetService.class);
         views.setRemoteAdapter(R.id.widget_listview, intent);
         // Set the MainActivity intent to launch when clicked
-
-
         Intent appIntent = new Intent(context, MainActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_listview, appPendingIntent);
-        // Handle empty list
-        //views.setEmptyView(R.id.widget_grid_view, R.id.empty_view);
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_listview);
@@ -39,8 +34,6 @@ public class NewsWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }

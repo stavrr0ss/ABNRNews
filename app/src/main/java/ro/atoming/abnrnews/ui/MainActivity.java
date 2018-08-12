@@ -11,35 +11,57 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.network.ArticleSyncUtils;
 import ro.atoming.abnrnews.ui.adapters.CategoryAdapter;
 import ro.atoming.abnrnews.widget.ListViewRemoteFactory;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TEST_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=c8600b24321c416db9225ea91647f69c";
+
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    @BindView(R.id.adView)
+    AdView mAdView;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.sliding_tabs)
+    TabLayout tabs;
+    @BindView(R.id.detail_toolbar)
+    Toolbar myToolbar;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Stetho.initializeWithDefaults(this);
-        Toolbar myToolbar = findViewById(R.id.app_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ButterKnife.bind(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        setSupportActionBar(myToolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        //ViewPager viewPager = findViewById(R.id.viewPager);
         CategoryAdapter fragmentAdapter = new CategoryAdapter(getSupportFragmentManager(),this);
         viewPager.setAdapter(fragmentAdapter);
-        TabLayout tabs = findViewById(R.id.sliding_tabs);
+
+        //TabLayout tabs = findViewById(R.id.sliding_tabs);
         tabs.setupWithViewPager(viewPager);
 
         ArticleSyncUtils.initialize(this);
         ListViewRemoteFactory.updateAllWidgets(this);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

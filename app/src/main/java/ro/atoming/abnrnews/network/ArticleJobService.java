@@ -10,7 +10,7 @@ import ro.atoming.abnrnews.utils.NotificationUtils;
 
 public class ArticleJobService extends JobService {
 
-    private AsyncTask<Void, Void, Void> mGetArticlesTask;
+    private static AsyncTask<Void, Void, Void> mGetArticlesTask;
 
     @Override
     public boolean onStartJob(final JobParameters jobparameters) {

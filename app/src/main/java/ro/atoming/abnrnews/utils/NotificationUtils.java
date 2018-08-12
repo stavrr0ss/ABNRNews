@@ -41,8 +41,9 @@ public class NotificationUtils {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_action_news)
-                .setContentTitle("ABNR News")
-                .setContentText("There are new articles waiting for you !")
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(context.getString(R.string.notification_contentText))
+                .setColor(context.getResources().getColor(R.color.primaryColorABNR))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true);

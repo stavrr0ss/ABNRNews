@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/article_layout"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="@dimen/widget_image_height"
     android:orientation="horizontal"
-    android:padding="4dp">
+    android:background="@color/lightPrimaryABNR"
+    android:padding="@dimen/list_item_padding">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/widget_image_height"
+        android:layout_height="@dimen/widget_image_width"
+        android:contentDescription="@string/widget_image_content_description"
         android:scaleType="centerCrop"
         android:src="@drawable/newspaper_resized" />
 
@@ -18,14 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingEnd="@dimen/list_item_padding"
+        android:paddingStart="@dimen/list_item_padding"
         android:padding="2dp">
 
     <TextView
         android:id="@+id/widget_article_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="Article Name"
+        android:layout_alignParentStart="true"
+        android:text="@string/article_name_placeholder"
+        android:textColor="@color/primaryTextABNR"
         android:textStyle="bold" />
 
         <TextView
@@ -33,10 +38,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/widget_article_name"
             android:gravity="bottom"
-            android:text="Article Date" />
+            android:text="@string/list_item_date_placeholder"
+            android:textColor="@color/primaryTextABNR" />
 
 
     </RelativeLayout>

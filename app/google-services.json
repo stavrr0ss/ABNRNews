@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "273179400218",
+    "firebase_url": "https://abnr-news.firebaseio.com",
+    "project_id": "abnr-news",
+    "storage_bucket": "abnr-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273179400218:android:5fcbff457f39c603",
+        "android_client_info": {
+          "package_name": "ro.atoming.abnrnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273179400218-9ho1g17iknr9kh1k8hhe9jv1207asghn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvppNDGHDEBqIGHOOSx4ac3-1cwQ69exE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
