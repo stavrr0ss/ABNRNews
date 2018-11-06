@@ -124,6 +124,47 @@
     <string name="label_country_Venezuela">Venezuela</string>
     <string name="label_country_SouthAfrica">South Africa</string>
 
+    <!--Values for languages -->
+    <string name="value_language_Arabic">ar</string>
+    <string name="value_language_German">de</string>
+    <string name="value_language_English">en</string>
+    <string name="value_language_Spanish">es</string>
+    <string name="value_language_French">fr</string>
+    <string name="value_language_Hebrew">he</string>
+    <string name="value_language_Italian">it</string>
+    <string name="value_language_Dutch">nl</string>
+    <string name="value_language_Norwegian">no</string>
+    <string name="value_language_Portughese">pt</string>
+    <string name="value_language_Rusian">ru</string>
+    <string name="value_language_Swedish">se</string>
+    <string name="value_language_Chinese">zh</string>
+    <string name="value_language_Default"> </string>
+
+    <string name="label_language_Arabic">Arabic</string>
+    <string name="label_language_German">Deutsch</string>
+    <string name="label_language_English">English</string>
+    <string name="label_language_Spanish">Espanol</string>
+    <string name="label_language_French">Francais</string>
+    <string name="label_language_Hebrew">Hebrew</string>
+    <string name="label_language_Italian">Italiano</string>
+    <string name="label_language_Dutch">Nederlands</string>
+    <string name="label_language_Norwegian">Norsk</string>
+    <string name="label_language_Portughese">Portuguese</string>
+    <string name="label_language_Rusian">Russian</string>
+    <string name="label_language_Chinese">Chinese</string>
+    <string name="label_language_default">Default</string>
+
+    <string name="pref_sortBy_key">SortBy</string>
+    <string name="pref_sortBy_default">publishedAt</string>
+
+    <string name="label_sort_relevancy">Relevance</string>
+    <string name="label_sort_popularity">Popularity</string>
+    <string name="label_sort_date">Date</string>
+
+    <string name="value_sort_relevancy">relevancy</string>
+    <string name="value_sort_popularity">popularity</string>
+    <string name="value_sort_date">publishedAt</string>
+
     <string name="pref_country_key" translatable="false">country</string>
 
     <string name="pref_pageSize_key">pageSize</string>
@@ -149,5 +190,8 @@
     <string name="fab_contentDescription">Button used to share the current article link by mail or social media.</string>
     <string name="notification_contentText">There are new articles waiting for you !</string>
     <string name="settings_title">Settings</string>
+    <string name="pref_language_key">Language</string>
+    <string name="pref_title_sortBy">Sort By</string>
+    <string name="share_link_message">Sent from ABNR News : </string>
 
 </resources>

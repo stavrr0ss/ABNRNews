@@ -22,5 +22,18 @@
         android:key="@string/pref_country_key"
         android:title="Select Country" />
 
+    <ListPreference
+        android:defaultValue="@string/value_language_Default"
+        android:entries="@array/array_languages_labels"
+        android:entryValues="@array/array_languages_values"
+        android:key="@string/pref_language_key"
+        android:title="Select Language" />
+    <ListPreference
+        android:defaultValue="@string/pref_sortBy_default"
+        android:entries="@array/array_sortBy_labels"
+        android:entryValues="@array/array_sortBy_values"
+        android:key="@string/pref_sortBy_key"
+        android:title="@string/pref_title_sortBy" />
+
 
 </PreferenceScreen>

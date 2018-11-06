@@ -114,4 +114,48 @@
         <item>@string/key_country_Venezuela</item>
 
     </array>
+    <array name="array_languages_labels">
+        <item>@string/label_language_default</item>
+        <item>@string/label_language_Arabic</item>
+        <item>@string/label_language_Chinese</item>
+        <item>@string/label_language_Dutch</item>
+        <item>@string/label_language_English</item>
+        <item>@string/label_language_French</item>
+        <item>@string/label_language_German</item>
+        <item>@string/label_language_Hebrew</item>
+        <item>@string/label_language_Italian</item>
+        <item>@string/label_language_Norwegian</item>
+        <item>@string/label_language_Portughese</item>
+        <item>@string/label_language_Rusian</item>
+        <item>@string/label_language_Spanish</item>
+
+    </array>
+
+    <array name="array_languages_values">
+        <item>@string/value_language_Default</item>
+        <item>@string/value_language_Arabic</item>
+        <item>@string/value_language_Chinese</item>
+        <item>@string/value_language_Dutch</item>
+        <item>@string/value_language_English</item>
+        <item>@string/value_language_French</item>
+        <item>@string/value_language_German</item>
+        <item>@string/value_language_Hebrew</item>
+        <item>@string/value_language_Italian</item>
+        <item>@string/value_language_Norwegian</item>
+        <item>@string/value_language_Portughese</item>
+        <item>@string/value_language_Rusian</item>
+        <item>@string/value_language_Spanish</item>
+
+    </array>
+    <array name="array_sortBy_labels">
+        <item>@string/label_sort_relevancy</item>
+        <item>@string/label_sort_popularity</item>
+        <item>@string/label_sort_date</item>
+    </array>
+    <array name="array_sortBy_values">
+        <item>@string/value_sort_relevancy</item>
+        <item>@string/value_sort_popularity</item>
+        <item>@string/value_sort_date</item>
+    </array>
+
 </resources>

@@ -23,6 +23,7 @@ import java.util.Scanner;
 import ro.atoming.abnrnews.R;
 import ro.atoming.abnrnews.model.Article;
 import ro.atoming.abnrnews.model.ArticleSource;
+import ro.atoming.abnrnews.ui.fragments.PreferenceFragment;
 
 import static ro.atoming.abnrnews.data.NewsContract.NewsEntry;
 
@@ -57,6 +58,8 @@ public class QueryUtils {
     public static final String COUNTRY = "country";
     public static final String pageSize = "pageSize";
     public static final String query = "q";
+    public static final String language = "language";
+    public static final String sortBy = "sortBy";
 
 
 
@@ -88,17 +91,34 @@ public class QueryUtils {
      * @return
      */
     public static String buildQueryUri(String searchTerm, Context context) {
+        Uri buildUri = null;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences
                 (context);
         String articleNumbersPref = sharedPreferences.getString(context.getString(R.string.pref_pageSize_key),
                 context.getString(R.string.pref_pageSize_defaultValue));
+        String languagePref = sharedPreferences.getString(context.getString(R.string.pref_language_key),
+                context.getString(R.string.value_language_Default));
+        String sortByPref = sharedPreferences.getString(context.getString(R.string.pref_sortBy_key),
+                context.getString(R.string.value_sort_date));
 
-        Uri buildUri = Uri.parse(EVERYTHING_BASE_URL).buildUpon()
-                .appendQueryParameter(pageSize, articleNumbersPref)
-                .appendQueryParameter(query, searchTerm)
-                .appendQueryParameter(api_key, API_KEY)
-                .build();
-        Log.d(LOG_TAG, "THIS IS THE QUERY URL !!!!!!! : " + buildUri.toString());
+        if (PreferenceFragment.isLanguageChanged = true) {
+            buildUri = Uri.parse(EVERYTHING_BASE_URL).buildUpon()
+                    .appendQueryParameter(pageSize, articleNumbersPref)
+                    .appendQueryParameter(query, searchTerm)
+                    .appendQueryParameter(language, languagePref)
+                    .appendQueryParameter(sortBy, sortByPref)
+                    .appendQueryParameter(api_key, API_KEY)
+                    .build();
+            Log.d(LOG_TAG, "THIS IS THE LANGUAGED CHANGED QUERY !!!" + buildUri.toString());
+        } else {
+            buildUri = Uri.parse(EVERYTHING_BASE_URL).buildUpon()
+                    .appendQueryParameter(pageSize, articleNumbersPref)
+                    .appendQueryParameter(query, searchTerm)
+                    .appendQueryParameter(sortBy, sortByPref)
+                    .appendQueryParameter(api_key, API_KEY)
+                    .build();
+            Log.d(LOG_TAG, "THIS IS THE QUERY URL !!!!!!! : " + buildUri.toString());
+        }
         return buildUri.toString();
     }
 

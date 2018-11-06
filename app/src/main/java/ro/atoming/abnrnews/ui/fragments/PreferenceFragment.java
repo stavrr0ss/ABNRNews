@@ -17,6 +17,9 @@ public class PreferenceFragment extends PreferenceFragmentCompat implements Shar
 
     public String COUNTRY_PREF;
     public String ARTICLE_NUMBER;
+    public static boolean isLanguageChanged;
+    public String SELECTED_LANGUAGE;
+    public String SORT_BY;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -27,6 +30,13 @@ public class PreferenceFragment extends PreferenceFragmentCompat implements Shar
                 getString(R.string.key_country_UnitedStates));
         ARTICLE_NUMBER = sharedPreferences.getString(getString(R.string.pref_pageSize_key),
                 getString(R.string.pref_pageSize_defaultValue));
+        SELECTED_LANGUAGE = sharedPreferences.getString(getString(R.string.pref_language_key),
+                getString(R.string.value_language_Default));
+        SORT_BY = sharedPreferences.getString(getString(R.string.pref_sortBy_key),
+                getString(R.string.value_sort_date));
+
+        isLanguageChanged = false;
+
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         int countPref = preferenceScreen.getPreferenceCount();
         for (int i = 0; i < countPref; i++) {
@@ -49,6 +59,15 @@ public class PreferenceFragment extends PreferenceFragmentCompat implements Shar
         if (key.equals(getString(R.string.pref_pageSize_key))) {
             ARTICLE_NUMBER = sharedPreferences.getString(getString(R.string.pref_pageSize_key),
                     getString(R.string.pref_pageSize_defaultValue));
+        }
+        if (key.equals(getString(R.string.pref_language_key))) {
+            SELECTED_LANGUAGE = sharedPreferences.getString(getString(R.string.pref_language_key),
+                    getString(R.string.value_language_Default));
+            isLanguageChanged = true;
+        }
+        if (key.equals(getString(R.string.pref_sortBy_key))) {
+            SORT_BY = sharedPreferences.getString(getString(R.string.pref_sortBy_key),
+                    getString(R.string.value_sort_date));
         }
         Preference preference = findPreference(key);
         if (preference != null) {
